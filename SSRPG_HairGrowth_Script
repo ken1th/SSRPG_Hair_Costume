@@ -110,6 +110,11 @@ func elementHair(hair)
 
 //?(loc.id = "waterfall" & totalTime%15 = 0)
 ?loc.loop | loc.begin
+  storage.Set("hairArdHead", hairystyle[0])
+  storage.Set("hairLong1", hairystyle[1])
+  storage.Set("hairLong2", hairystyle[2])
+  storage.Set("hairLong3", hairystyle[3])
+  storage.Set("hairCounter", hairCounter)
   ?rng%diviken = 0
     ?hairCounter = 1
       hairystyle.Emplace(0, hairart2)
@@ -131,11 +136,6 @@ func elementHair(hair)
     :
       diviken = (hairCounter-5) * (hairCounter-5)
     hairCounter ++
-    storage.Set("hairArdHead", hairystyle[0])
-    storage.Set("hairLong1", hairystyle[1])
-    storage.Set("hairLong2", hairystyle[2])
-    storage.Set("hairLong3", hairystyle[3])
-    storage.Set("hairCounter", hairCounter)
   :
     diviken--
   //another part for replacing one character in hair with elemental character
