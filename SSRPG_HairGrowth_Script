@@ -1,0 +1,179 @@
+//============hairgrowth================
+var hairart1 = ascii
+#########
+#####"""#
+#########
+#########
+#########
+#########
+asciiend
+
+var hairart2 = ascii
+#########
+####.???.
+#########
+#########
+#########
+#########
+asciiend
+
+var hairart3 = ascii
+####,~**#
+###; /!~\
+###j!;###
+#########
+#########
+#########
+asciiend
+
+var hairart4 = ascii
+####,~**#
+###; /!~\
+###j!;###
+##J;#####
+#########
+#########
+asciiend
+
+var hairart5 = ascii
+####,~**#
+###; /!~\
+###j!;###
+##J;#####
+#Jj!#####
+#########
+asciiend
+
+var hairart6 = ascii
+####,~**#
+###; /!~\
+###j!;###
+##J;#####
+#Jj!#####
+´ _)#####
+asciiend
+
+?loc.begin
+  var hairystyle = [storage.Get("hairArdHead", hairart1),
+                   ^storage.Get("hairLong1", ""),
+                   ^storage.Get("hairLong2", ""),
+                   ^storage.Get("hairLong3", "")]
+  var hairCounter = storage.Get("hairCounter", 0)
+  var diviken = storage.Get("hairCounter", 0) + 2
+
+var hairPiece
+var randomN
+func longerHair(hair)
+  randomN = rng
+  ?randomN%6=0
+    hairPiece = "–"
+  :?randomN%6=1
+    hairPiece = "☆"
+  :?randomN%6=2
+    hairPiece = "J"
+  :?randomN%6=3
+    hairPiece = "_"
+  :?randomN%6=4
+    hairPiece = "～"
+  :?randomN%6=5
+    hairPiece = " "
+  return hairPiece + hair
+
+var hairLayer
+var hairLength
+var hairParts
+func elementHair(hair)
+  hairLength = string.Size(hair)
+  hairParts = string.Break(hair, 1)
+  ?loc.id = "rocky_plateau"
+    hairPiece = "§"
+  :?loc.id = "deadwood_valley"
+    hairPiece = "┊"
+  :?loc.id = "caustic_caves"
+    hairPiece = "∞"
+  :?loc.id = "waterfall"
+    hairPiece = "♠"
+  :?loc.id = "fungus_forest"
+    hairPiece = "❤"
+  :?loc.id = "undead_crypt"
+    hairPiece = "*"
+  :?loc.id = "bronze_mine"
+    hairPiece = "φ"
+  :?loc.id = "icy_ridge"
+    hairPiece = "❄"
+  :?loc.id = "temple"
+    hairPiece = "☥"
+  :
+    hairPiece = "♫"
+  hairParts.Emplace(rng%hairLength, hairPiece)
+  return string.Join("", hairParts)
+
+//?(loc.id = "waterfall" & totalTime%15 = 0)
+?loc.loop | loc.begin
+  ?rng%diviken = 0
+    ?hairCounter = 1
+      hairystyle.Emplace(0, hairart2)
+    :?hairCounter = 2
+      hairystyle.Emplace(0, hairart3)
+    :?hairCounter = 3
+      hairystyle.Emplace(0, hairart4)
+    :?hairCounter = 4
+      hairystyle.Emplace(0, hairart5)
+    :?hairCounter = 5
+      hairystyle.Emplace(0, hairart6)
+    :?hairCounter >= 6
+      hairystyle.Emplace(1, longerHair(hairystyle[1]))
+      hairystyle.Emplace(2, longerHair(hairystyle[2]))
+      hairystyle.Emplace(3, longerHair(hairystyle[3]))
+
+    ?hairCounter < 7
+      diviken = hairCounter + 1
+    :
+      diviken = (hairCounter-5) * (hairCounter-5)
+    hairCounter ++
+    storage.Set("hairArdHead", hairystyle[0])
+    storage.Set("hairLong1", hairystyle[1])
+    storage.Set("hairLong2", hairystyle[2])
+    storage.Set("hairLong3", hairystyle[3])
+    storage.Set("hairCounter", hairCounter)
+  :
+    diviken--
+  //another part for replacing one character in hair with elemental character
+  ?hairCounter > 8 & rng%hairCounter = 0
+    hairLayer = rng%3 + 1
+    hairystyle.Emplace(hairLayer, elementHair(hairystyle[hairLayer]))
+
+>o-6,-2,#white,@hairystyle[0]@
+var longhairU
+var longhairM
+var longhairL
+var tt
+tt = totalTime
+?tt%30<10
+  longhairU = hairystyle[1]
+  longhairM = hairystyle[2]
+  longhairL = hairystyle[3]
+:?tt%30<20
+  longhairU = hairystyle[1]
+  longhairM = hairystyle[3]
+  longhairL = hairystyle[2]
+:
+  longhairU = hairystyle[3]
+  longhairM = hairystyle[1]
+  longhairL = hairystyle[2]
+
+>o@-hairCounter+1@,1,#white,@longhairU@
+>o@-hairCounter+1@,2,#white,@longhairM@
+>o@-hairCounter+1@,3,#white,@longhairL@
+
+// delete storage using loop
+/*
+var hairKeys
+hairKeys = ["hairArdHead", "hairLong1", "hairLong2", "hairLong3", "hairCounter"]
+for key : hairKeys
+  ?storage.Has(key)
+    storage.Delete(key)
+var deletedKeyString
+deletedKeyString = string.Join(",", hairKeys)
+>`0,0,no more @deletedKeyString@ from storage
+*/
