@@ -102,7 +102,7 @@ func elementHair(hair)
   :?loc.id = "icy_ridge"
     hairPiece = "❄"
   :?loc.id = "temple"
-    hairPiece = "☥"
+    hairPiece = "†"
   :
     hairPiece = "♫"
   hairParts.Emplace(rng%hairLength, hairPiece)
