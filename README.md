@@ -2,6 +2,11 @@
 
 Enhance your Stone Story RPG experience with a script that doesn't just change your character's hair over time—it evolves with your journey. This Hair Growth Costume Script introduces a mechanic where your character's hair grows in real-time, reacting not only to the passage of game time but also adapting its growth speed as it gets longer. With environmental influences and stored hairstyles, this feature adds depth and personalization to your adventure, ensuring that no two players' hair styles are exactly alike.
 
+![shorthair](https://github.com/ken1th/SSRPG_Hair_Costume/assets/87118032/12e3f251-6d0b-4479-9fdd-920364a8b913)
+![midhair](https://github.com/ken1th/SSRPG_Hair_Costume/assets/87118032/e947b9e2-260a-474d-9019-b5da52fcecb9)
+![longhair](https://github.com/ken1th/SSRPG_Hair_Costume/assets/87118032/b5310f13-e807-41a1-b6d9-93799fe6b865)
+![hairystyle](https://github.com/ken1th/SSRPG_Hair_Costume/assets/87118032/3da34ab1-77b9-4b18-8124-323649600a07)
+
 ## Key Features
 
 - **Environmental Triggers**: The game world leaves its mark on your character through their hair. Depending on the locations visited, unique elements might adorn your hairstyle, adding a magical touch. Fancy some hearts entwined in your locks? The Mushroom Forest awaits!
